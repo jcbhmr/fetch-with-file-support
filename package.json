@@ -1,0 +1,76 @@
+{
+  "name": "fetch-file-scheme",
+  "version": "0.0.1",
+  "description": "A fetch implementation for the file: URL scheme in Node",
+  "keywords": [
+    "fetch",
+    "file",
+    "filesystem",
+    "url",
+    "promise",
+    "async",
+    "await",
+    "isomorphic",
+    "universal",
+    "node",
+    "browser",
+    "whatwg"
+  ],
+  "type": "module",
+  "main": "dist/fetch-file-scheme.cjs",
+  "browser": "src/fetch-file-scheme.mjs",
+  "module": "src/fetch-file-scheme.mjs",
+  "exports": {
+    "import": "./src/fetch-file-scheme.mjs",
+    "require": "./dist/fetch-file-scheme.cjs"
+  },
+  "jsdelivr": "dist/fetch-file-scheme.umd.js",
+  "unpkg": "dist/fetch-file-scheme.umd.js",
+  "files": [
+    "src/*",
+    "dist/*",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "test": "npm run lint && npm run coverage",
+    "coverage": "npm run jest-node -- --coverage",
+    "lint": "eslint -c .eslintrc.cjs \"src/**/*.mjs\"",
+    "jest-node": "jest --config=./jest-node.config.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolas-van/fetch-file-scheme.git"
+  },
+  "author": "Nicolas Vanhoren",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicolas-van/fetch-file-scheme/issues"
+  },
+  "homepage": "https://github.com/nicolas-van/fetch-file-scheme#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/plugin-transform-modules-umd": "^7.14.5",
+    "@babel/preset-env": "^7.15.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "babel-jest": "^27.0.6",
+    "clean-jsdoc-theme": "^3.2.7",
+    "core-js": "^3.16.2",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-jsdoc": "^36.0.7",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^4.1.0",
+    "jest": "^27.0.6",
+    "jsdoc": "^3.6.7",
+    "lodash": "^4.17.21",
+    "rollup": "^2.56.3"
+  }
+}
