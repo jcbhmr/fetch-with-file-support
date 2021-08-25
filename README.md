@@ -14,6 +14,10 @@ npm install fetch-file-scheme
 
 TODO
 
+## Notes
+
+https://github.com/node-fetch/node-fetch/issues/75
+
 ## Changelog
 
 [The changelog](https://github.com/nicolas-van/fetch-file-scheme/blob/master/CHANGELOG.md).
