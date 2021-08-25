@@ -4,19 +4,19 @@ import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 
 export default [{
-  input: 'src/fetch-switcher.mjs',
+  input: 'src/fetch-file-scheme.mjs',
   external: [],
   output: {
-    file: 'dist/fetch-switcher.cjs',
+    file: 'dist/fetch-file-scheme.cjs',
     format: 'cjs'
   },
   plugins: []
 }, {
-  input: 'src/fetch-switcher.mjs',
+  input: 'src/fetch-file-scheme.mjs',
   output: {
-    file: 'dist/fetch-switcher.umd.js',
+    file: 'dist/fetch-file-scheme.umd.js',
     format: 'umd',
-    name: 'fetchSwitcher'
+    name: 'fetchFileScheme'
   },
   plugins: [
     nodeResolve(),
