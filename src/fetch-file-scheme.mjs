@@ -1,14 +1,15 @@
 
 import { createReadStream, statSync } from 'fs'
-import { Request, Response } from 'node-fetch'
+import { Request, Response, Headers } from 'node-fetch'
 import assert from 'assert'
+import { lookup } from 'mime-types'
 
 /**
  * Do stuff
  *
- * @param {any} resource resource
- * @param {any} init init
- * @returns {any} something
+ * @param {string|URL|Request} resource resource
+ * @param {object} init init
+ * @returns {Promise<Response>} something
  */
 async function fetchFile (resource, init) {
   const request = new Request(resource, init)
@@ -27,6 +28,10 @@ async function fetchFile (resource, init) {
             status: 200,
             statusText: 'OK',
             size: size,
+            headers: new Headers({
+              'Content-Length': size,
+              'Content-Type': lookup(filePath) || 'application/octet-stream'
+            }),
             timeout: request.timeout
           })
           resolve(response)
