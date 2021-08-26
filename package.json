@@ -33,7 +33,7 @@
     "LICENSE.md"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.js",
+    "build": "echo 'deactivated' || rollup -c rollup.config.js",
     "test": "npm run lint && npm run coverage",
     "coverage": "npm run jest-node -- --coverage",
     "lint": "eslint -c .eslintrc.cjs \"src/**/*.mjs\"",
