@@ -4,6 +4,7 @@ import { fetchFile } from './fetch-file-scheme.mjs'
 import { join } from 'path'
 import fs from 'fs'
 import tmp from 'tmp-promise'
+import { Request } from 'node-fetch'
 
 const dataPath = join(__dirname, '__test_data')
 
@@ -26,6 +27,23 @@ test('base', async () => {
   expect(res.bodyUsed).toStrictEqual(false)
   const text = await res.text()
   expect(res.bodyUsed).toStrictEqual(true)
+  expect(text).toStrictEqual(referenceText)
+})
+
+test('multiple request types', async () => {
+  const path = join(dataPath, 'test-base.txt')
+  const referenceText = await fs.promises.readFile(path, 'utf8')
+  let res = await fetchFile(`file://${path}`)
+  let text = await res.text()
+  expect(text).toStrictEqual(referenceText)
+  res = await fetchFile(new URL(`file://${path}`))
+  text = await res.text()
+  expect(text).toStrictEqual(referenceText)
+  res = await fetchFile(new Request(`file://${path}`))
+  text = await res.text()
+  expect(text).toStrictEqual(referenceText)
+  res = await fetchFile(new Request(new URL(`file://${path}`)))
+  text = await res.text()
   expect(text).toStrictEqual(referenceText)
 })
 
