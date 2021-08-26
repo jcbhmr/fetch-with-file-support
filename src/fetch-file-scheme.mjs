@@ -1,7 +1,6 @@
 
 import fs from 'fs'
 import { Request, Response, Headers } from 'node-fetch'
-import assert from 'assert'
 import { lookup } from 'mime-types'
 import { __wrapReject } from './__wrapReject.mjs'
 
@@ -14,10 +13,6 @@ import { __wrapReject } from './__wrapReject.mjs'
  */
 async function fetchFile (resource, init) {
   const request = new Request(resource, init)
-  const url = request.url
-  const match = url.match(/^file:\/\/(.*)$/)
-  assert(match, 'Invalid file URL. It must start with "file://"')
-  const filePath = match[1]
   return new Promise((resolve, reject) => {
     const resolveError = (error) => {
       const errorMessage = error.message
@@ -49,6 +44,10 @@ async function fetchFile (resource, init) {
       }))
     }
     __wrapReject(resolveError, () => {
+      const url = request.url
+      const match = url.match(/^file:\/\/(.*)$/)
+      const filePath = match ? match[1] : url
+
       const readStream = fs.createReadStream(filePath)
       readStream.on('open', () => {
         __wrapReject(resolveError, async () => {
