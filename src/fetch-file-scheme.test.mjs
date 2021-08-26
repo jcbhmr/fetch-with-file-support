@@ -2,14 +2,15 @@
 import { expect, test } from '@jest/globals'
 import { fetchFile } from './fetch-file-scheme.mjs'
 import { join } from 'path'
-import { readFileSync, statSync } from 'fs'
+import fs from 'fs'
+import tmp from 'tmp-promise'
 
 const dataPath = join(__dirname, '__test_data')
 
 test('base', async () => {
   const path = join(dataPath, 'test-base.txt')
-  const referenceText = readFileSync(path, 'utf8')
-  const referenceSize = statSync(path).size
+  const referenceText = await fs.promises.readFile(path, 'utf8')
+  const referenceSize = (await fs.promises.stat(path)).size
 
   const res = await fetchFile(`file://${path}`)
   expect(res.url).toStrictEqual(`file://${path}`)
@@ -42,4 +43,32 @@ test('file doesn\'t exist', async () => {
   expect(res.bodyUsed).toStrictEqual(false)
   await res.text()
   expect(res.bodyUsed).toStrictEqual(true)
+})
+
+test('file access rules forbid read', async () => {
+  const tmpDir = await tmp.dir({
+    unsafeCleanup: true
+  })
+  try {
+    const tmpPath = tmpDir.path
+    const path = join(tmpPath, 'test-no-read.txt')
+    await fs.promises.writeFile(path, 'test data')
+    const restest = await fetchFile(`file://${path}`)
+    expect(restest.ok).toStrictEqual(true)
+    await fs.promises.chmod(path, 0o000)
+
+    const res = await fetchFile(`file://${path}`)
+    expect(res.url).toStrictEqual(`file://${path}`)
+    expect(res.ok).toStrictEqual(false)
+    expect(res.status).toStrictEqual(403)
+    expect(res.statusText).toStrictEqual('Forbidden')
+    expect(res.redirected).toStrictEqual(false)
+    expect(res.headers.get('Content-Type')).toStrictEqual('text/plain')
+    expect(res.body).toBeDefined()
+    expect(res.bodyUsed).toStrictEqual(false)
+    await res.text()
+    expect(res.bodyUsed).toStrictEqual(true)
+  } finally {
+    tmpDir.cleanup()
+  }
 })

@@ -20,6 +20,8 @@ async function fetchFile (resource, init) {
       const status = (() => {
         if (error.code === 'ENOENT') {
           return 404
+        } if (error.code === 'EACCES') {
+          return 403
         } else {
           return 500
         }
@@ -27,6 +29,8 @@ async function fetchFile (resource, init) {
       const statusText = (() => {
         if (status === 404) {
           return 'Not Found'
+        } else if (status === 403) {
+          return 'Forbidden'
         } else { // 500
           return 'Internal Server Error'
         }
@@ -66,9 +70,7 @@ async function fetchFile (resource, init) {
           resolve(response)
         })
       })
-      readStream.on('error', async (e) => {
-        resolveError(e)
-      })
+      readStream.on('error', resolveError)
     })
   })
 }
