@@ -11,16 +11,4 @@ export default [{
     format: 'cjs'
   },
   plugins: []
-}, {
-  input: 'src/fetch-file-scheme.mjs',
-  output: {
-    file: 'dist/fetch-file-scheme.umd.js',
-    format: 'umd',
-    name: 'fetchFileScheme'
-  },
-  plugins: [
-    nodeResolve(),
-    commonjs(),
-    babel({ babelHelpers: 'bundled' })
-  ]
 }]

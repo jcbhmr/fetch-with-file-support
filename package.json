@@ -1,6 +1,6 @@
 {
   "name": "fetch-file-scheme",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.1",
   "description": "A fetch implementation for the file: URL scheme in Node",
   "keywords": [
     "fetch",
@@ -33,7 +33,7 @@
     "LICENSE.md"
   ],
   "scripts": {
-    "build": "echo 'deactivated' || rollup -c rollup.config.js",
+    "build": "rollup -c rollup.config.js",
     "test": "npm run lint && npm run coverage",
     "coverage": "npm run jest-node -- --coverage",
     "lint": "eslint -c .eslintrc.cjs \"src/**/*.mjs\"",
