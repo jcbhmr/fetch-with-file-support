@@ -1,4 +1,4 @@
-import { openAsBlob } from "node:fs";
+import openAsBlob from "./lib/node-fs-openAsBlob.js";
 
 // export const { Headers, Request, Response } = globalThis;
 // export type HeadersInit = globalThis.HeadersInit;
@@ -27,7 +27,7 @@ export async function fetch(
         Headers: typeof globalThis.Headers;
       },
   input: RequestInfo,
-  init: RequestInit | undefined = {}
+  init: RequestInit | undefined = {},
 ) {
   const {
     fetch = globalThis.fetch,
@@ -35,7 +35,6 @@ export async function fetch(
     Response = globalThis.Response,
     Headers = globalThis.Headers,
   } = this ?? globalThis;
-
   const request =
     input instanceof Request && !init ? input : new Request(input, init);
   if (request.url.startsWith("file:")) {
@@ -50,7 +49,7 @@ export async function fetch(
     } else {
       throw new TypeError(
         `Fetching files only supports the GET method. ` +
-          `Recieved ${request.method}.`
+          `Recieved ${request.method}.`,
       );
     }
   } else {
