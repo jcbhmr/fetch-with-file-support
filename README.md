@@ -1,31 +1,34 @@
-# fetch-file-scheme
-
-NOT READY YET !!
-
-[![GitHub Repo stars](https://img.shields.io/github/stars/nicolas-van/fetch-file-scheme?style=social)](https://github.com/nicolas-van/fetch-file-scheme/stargazers) [![Node.js CI](https://github.com/nicolas-van/fetch-file-scheme/workflows/Node.js%20CI/badge.svg)](https://github.com/nicolas-van/fetch-file-scheme/actions) [![npm](https://img.shields.io/npm/v/fetch-file-scheme)](https://www.npmjs.com/package/fetch-file-scheme) [![Coverage Status](https://coveralls.io/repos/github/nicolas-van/fetch-file-scheme/badge.svg?branch=master)](https://coveralls.io/github/nicolas-van/fetch-file-scheme?branch=master) [![](https://data.jsdelivr.com/v1/package/npm/fetch-file-scheme/badge)](https://www.jsdelivr.com/package/npm/fetch-file-scheme)
+# `fetch()` with `file:` support
 
 ## Installation
 
-```bash
-npm install fetch-file-scheme
+```sh
+npm install fetch-with-file-support
 ```
 
 ## Usage
 
-TODO
+```js
+import { fetch } from "fetch-with-file-support"
 
-## Notes
+const response = await fetch(import.meta.resolve("./package.json"))
+const json = await response.json()
+```
 
-https://github.com/node-fetch/node-fetch/issues/75
+```js
+import * as undici from "undici"
+import { fetch as fetchUnbound } from "fetch-with-file-support"
+const fetch = fetchUnbound.bind(undici)
 
-## Changelog
+const response = await fetch(new URL("./package.json", import.meta.url))
+const json = await response.json()
+```
 
-[The changelog](https://github.com/nicolas-van/fetch-file-scheme/blob/master/CHANGELOG.md).
-
-## Contribution Guide
-
-[The contribution guide](https://github.com/nicolas-van/fetch-file-scheme/blob/master/CONTRIBUTING.md)
-
-## License
-
-[The license](https://github.com/nicolas-van/fetch-file-scheme/blob/master/LICENSE.md).
+```js
+const fetch = fetchWithFileSupport.bind({
+  fetch: underlyingFetch,
+  Request: ...,
+  Response: ...,
+  Headers: ..., // Unused in implementation
+})
+```
