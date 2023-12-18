@@ -1,5 +1,35 @@
 {
   "name": "fetch-with-file-support",
   "version": "1.0.0",
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "test": "tsc && node --test",
+    "test:browser": "vite",
+    "build": "tsc",
+    "format": "prettier -w ."
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/jcbhmr/fetch-with-file-support",
+  "bugs": "https://github.com/jcbhmr/fetch-with-file-support/issues",
+  "repository": "github:jcbhmr/fetch-with-file-support",
+  "contributors": [
+    "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)"
+  ],
+  "description": "📦 Typst for JavaScript",
+  "keywords": [
+    "typesetting",
+    "markup",
+    "typesetter",
+    "typeset",
+    "typst",
+    "latex",
+    "markdown",
+    "pdf"
+  ]
 }
