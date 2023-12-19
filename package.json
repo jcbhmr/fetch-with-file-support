@@ -31,5 +31,17 @@
     "latex",
     "markdown",
     "pdf"
-  ]
+  ],
+  "exports": {
+    ".": {
+      "deno": "./dist/index.deno.js",
+      "node": "./dist/index.node.js",
+      "default": "./dist/index.default.js"
+    },
+    "./auto": {
+      "deno": "./dist/auto.deno.js",
+      "node": "./dist/auto.node.js",
+      "default": "./dist/auto.default.js"
+    }
+  }
 }

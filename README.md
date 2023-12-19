@@ -2,6 +2,30 @@
 
 📂 `fetch()` but with support for `file:///my/file.txt` URLs
 
+<table align=center><td>
+
+```js
+// Native Node.js fetch
+const response = await fetch(import.meta.resolve("./data.txt"));
+const text = await response.text();
+console.log(text);
+// 🛑 TypeError: fetch failed
+//   cause: Error: not implemented... yet...
+```
+
+<tr><td>
+
+```js
+// Using fetch-with-file-support in Node.js
+import { fetch } from "fetch-with-file-support";
+const response = await fetch(import.meta.resolve("./data.txt"));
+const text = await response.text();
+console.log(text);
+// 'Hello from data.txt!'
+```
+
+</table>
+
 🔎 Works great for writing isomorphic `fetch(import.meta.resolve())` code \
 ✅ Uses streaming `openAsBlob()` if available \
 🧰 Supports bringing your own `fetch()` function \
@@ -9,17 +33,17 @@
 
 ## Installation
 
+![npm](https://img.shields.io/static/v1?style=for-the-badge&message=npm&color=CB3837&logo=npm&logoColor=FFFFFF&label=)
+![pnpm](https://img.shields.io/static/v1?style=for-the-badge&message=pnpm&color=222222&logo=pnpm&logoColor=F69220&label=)
+![Yarn](https://img.shields.io/static/v1?style=for-the-badge&message=Yarn&color=2C8EBB&logo=Yarn&logoColor=FFFFFF&label=)
+![Bun](https://img.shields.io/static/v1?style=for-the-badge&message=Bun&color=000000&logo=Bun&logoColor=FFFFFF&label=)
+![Deno](https://img.shields.io/static/v1?style=for-the-badge&message=Deno&color=000000&logo=Deno&logoColor=FFFFFF&label=)
+
 You can install this package using your favorite npm package manager like npm,
 [Yarn], [pnpm], or [Bun].
 
 ```sh
 npm install fetch-with-file-support
-```
-
-You can import it straight from npm if you're using [Deno]:
-
-```js
-import { fetch } from "npm:fetch-with-file-support";
 ```
 
 ℹ Deno already supports `fetch()`-ing `file:` URLs. This package will delegate
@@ -30,6 +54,10 @@ browsers support `fetch()`-ing `file:` URLs while others do not. Some support
 `file:` URLs only under special circumstances.
 
 ## Usage
+
+![Node.js](https://img.shields.io/static/v1?style=for-the-badge&message=Node.js&color=339933&logo=Node.js&logoColor=FFFFFF&label=)
+![Deno](https://img.shields.io/static/v1?style=for-the-badge&message=Deno&color=000000&logo=Deno&logoColor=FFFFFF&label=)
+![Bun](https://img.shields.io/static/v1?style=for-the-badge&message=Bun&color=000000&logo=Bun&logoColor=FFFFFF&label=)
 
 The quickest way to get started is to import the `fetch()` function straight
 from the module:
@@ -48,7 +76,7 @@ good example.
 ```js
 import { fetch } from "fetch-with-file-support";
 
-// Normally 'fetch("file:///mypkg/app_bg.wasm")' would fail!
+// Normally 'fetch("file:///mypkg/app_bg.wasm")' would fail in Node.js!
 const { module, instance } = await WebAssembly.instantiateStreaming(
   fetch(import.meta.resolve("./app_bg.wasm")),
   imports,
@@ -56,9 +84,9 @@ const { module, instance } = await WebAssembly.instantiateStreaming(
 ```
 
 If you want to bring your own `fetch()` implementation, you can bind the `this`
-context of the `fetch()` function to an object with `.fetch`, `.Request`,
-`.Response`, and `.Headers` properties. The implementation will use these
-instead of the globals.
+context of the `fetch()` function to an object with `options.fetch`,
+`options.Request`, `options.Response`, and `options.Headers` properties. The
+implementation will use these instead of the globals.
 
 ```js
 import * as undici from "undici";
@@ -68,3 +96,24 @@ const fetch = fetchUnbound.bind(undici);
 const response = await fetch(new URL("./package.json", import.meta.url));
 const json = await response.json();
 ```
+
+🌎 If you prefer global polyfills, you can import
+`fetch-with-file-support/auto`.
+
+```js
+import "fetch-with-file-support/auto";
+const response = await fetch(import.meta.resolve("./data.json"));
+const json = await response.json();
+```
+
+## Development
+
+![Node.js](https://img.shields.io/static/v1?style=for-the-badge&message=Node.js&color=339933&logo=Node.js&logoColor=FFFFFF&label=)
+![TypeScript](https://img.shields.io/static/v1?style=for-the-badge&message=TypeScript&color=3178C6&logo=TypeScript&logoColor=FFFFFF&label=)
+
+[![](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://stackblitz.com/~/github.com/jcbhmr/fetch-with-file-support)
+
+[deno]: https://deno.com/
+[yarn]: https://yarnpkg.com/
+[pnpm]: https://pnpm.io/
+[bun]: https://bun.sh/

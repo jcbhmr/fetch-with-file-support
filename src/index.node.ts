@@ -1,21 +1,5 @@
 import openAsBlob from "./lib/node-fs-openAsBlob.js";
 
-// export const { Headers, Request, Response } = globalThis;
-// export type HeadersInit = globalThis.HeadersInit;
-// export type XMLHttpRequestBodyInit = globalThis.XMLHttpRequestBodyInit;
-// export type BodyInit = globalThis.BodyInit;
-// export type Body = globalThis.Body;
-// export type RequestInfo = globalThis.RequestInfo;
-// export type RequestInit = globalThis.RequestInit;
-// export type RequestDestination = globalThis.RequestDestination;
-// export type RequestMode = globalThis.RequestMode;
-// export type RequestCredentials = globalThis.RequestCredentials;
-// export type RequestCache = globalThis.RequestCache;
-// export type RequestRedirect = globalThis.RequestRedirect;
-// export type RequestDuplex = globalThis.RequestDuplex;
-// export type RequestPriority = globalThis.RequestPriority;
-// export type ResponseInit = globalThis.ResponseInit;
-// export type ResponseType = globalThis.ResponseType;
 export async function fetch(
   this:
     | undefined
