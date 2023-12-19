@@ -1,37 +1,22 @@
 {
   "name": "fetch-with-file-support",
-  "version": "1.1.0",
-  "type": "module",
-  "scripts": {
-    "test": "tsc && node --test",
-    "test:browser": "vite",
-    "build": "tsc",
-    "format": "prettier -w ."
-  },
-  "devDependencies": {
-    "@types/node": "^20.10.5",
-    "prettier": "^3.1.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.10"
-  },
-  "license": "MIT",
+  "version": "1.1.1",
+  "description": "📂 fetch() but with support for file:///my/file.txt URLs",
+  "keywords": [
+    "nodejs",
+    "polyfill",
+    "fetch",
+    "wrapper",
+    "filesystem"
+  ],
   "homepage": "https://github.com/jcbhmr/fetch-with-file-support",
   "bugs": "https://github.com/jcbhmr/fetch-with-file-support/issues",
   "repository": "github:jcbhmr/fetch-with-file-support",
+  "license": "MIT",
   "contributors": [
     "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)"
   ],
-  "description": "📦 Typst for JavaScript",
-  "keywords": [
-    "typesetting",
-    "markup",
-    "typesetter",
-    "typeset",
-    "typst",
-    "latex",
-    "markdown",
-    "pdf"
-  ],
+  "type": "module",
   "exports": {
     ".": {
       "deno": "./dist/index.deno.js",
@@ -43,5 +28,17 @@
       "node": "./dist/auto.node.js",
       "default": "./dist/auto.default.js"
     }
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier -w .",
+    "test": "tsc && node --test",
+    "test:browser": "vite"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
   }
 }
