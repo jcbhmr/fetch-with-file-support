@@ -1,6 +1,6 @@
 {
   "name": "fetch-with-file-support",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "📂 fetch() but with support for file:///my/file.txt URLs",
   "keywords": [
     "nodejs",
@@ -40,5 +40,6 @@
     "prettier": "^3.1.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.10"
-  }
+  },
+  "files": ["dist"]
 }
