@@ -1,24 +1,11 @@
 import openAsBlob from "./lib/node-fs-openAsBlob.js";
 
+const { fetch: globalThisFetch, Request, Response, Headers } = globalThis
+
 export async function fetch(
-  this:
-    | undefined
-    | any
-    | {
-        fetch: typeof globalThis.fetch;
-        Request: typeof globalThis.Request;
-        Response: typeof globalThis.Response;
-        Headers: typeof globalThis.Headers;
-      },
   input: RequestInfo,
   init: RequestInit | undefined = {},
 ) {
-  const {
-    fetch = globalThis.fetch,
-    Request = globalThis.Request,
-    Response = globalThis.Response,
-    Headers = globalThis.Headers,
-  } = this ?? globalThis;
   const request =
     input instanceof Request && !init ? input : new Request(input, init);
   if (request.url.startsWith("file:")) {
@@ -37,6 +24,6 @@ export async function fetch(
       );
     }
   } else {
-    return await fetch(request);
+    return await globalThisFetch(request);
   }
 }

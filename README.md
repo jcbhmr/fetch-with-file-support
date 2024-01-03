@@ -83,20 +83,6 @@ const { module, instance } = await WebAssembly.instantiateStreaming(
 );
 ```
 
-If you want to bring your own `fetch()` implementation, you can bind the `this`
-context of the `fetch()` function to an object with `options.fetch`,
-`options.Request`, `options.Response`, and `options.Headers` properties. The
-implementation will use these instead of the globals.
-
-```js
-import * as undici from "undici";
-import { fetch as fetchUnbound } from "fetch-with-file-support";
-const fetch = fetchUnbound.bind(undici);
-
-const response = await fetch(new URL("./package.json", import.meta.url));
-const json = await response.json();
-```
-
 🌎 If you prefer global polyfills, you can import
 `fetch-with-file-support/auto`.
 
