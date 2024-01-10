@@ -27,8 +27,7 @@ console.log(text);
 </table>
 
 🔎 Works great for writing isomorphic `fetch(import.meta.resolve())` code \
-✅ Uses streaming `openAsBlob()` if available \
-🧰 Supports bringing your own `fetch()` function \
+🌊 Uses `fs.createReadStream()` for streaming reads \
 🦕 Mirrors Deno's implementation of `fetch()` for `file:` URLs
 
 ## Installation
