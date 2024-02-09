@@ -9,7 +9,7 @@ test("fetch() http works ok", async () => {
 });
 
 test("fetch() file works ok", async () => {
-  const response = await fetch(new URL("./example.txt", import.meta.url));
+  const response = await fetch(import.meta.url);
   const text = await response.text();
   console.log(text);
 });
