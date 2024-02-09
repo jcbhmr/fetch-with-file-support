@@ -8,10 +8,7 @@
     "moduleResolution": "NodeNext",
     "isolatedModules": true,
     "strict": false,
-    "skipLibCheck": true,
-    "paths": {
-      "#index.js": ["./src/index.default.ts"]
-    }
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
